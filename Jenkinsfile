@@ -15,7 +15,7 @@ pipeline {
         script {
           openshift.withCluster() {
             openshift.create(
-               '{"apiVersion": "build.openshift.io/v1","kind": "BuildConfig","metadata": {"annotations": {"description": "Defines how to build the application"},"labels": {"app": "forecast-svc"},"name": "forecast-svc-buildconfig","namespace": "egis"},"spec": {"failedBuildsHistoryLimit": "5","output": {"to": {"kind": "ImageStreamTag","name": "forecast-svc:latest"}},"postCommit": {"script": ""}, "runPolicy": "Serial","source": {"git": {"uri": "https://github.com/INTEGRITY-One/egis-forecast.git"},"type": "Git"},"strategy": {"type": "Source","sourceStrategy": {"from": {"kind": "ImageStream","namespace": "openshift","name": "java"}}},"successfulBuildsHistoryLimit": "5"}}'
+               '{"apiVersion": "build.openshift.io/v1","kind": "BuildConfig","metadata": {"annotations": {"description": "Defines how to build the application"},"labels": {"app": "forecast-svc"},"name": "forecast-svc-buildconfig","namespace": "egis"},"spec": {"failedBuildsHistoryLimit": "5","output": {"to": {"kind": "ImageStreamTag","name": "forecast-svc:latest"}},"postCommit": {"script": ""}, "runPolicy": "Serial","source": {"git": {"uri": "https://github.com/INTEGRITY-One/egis-forecast-svc.git"},"type": "Git"},"strategy": {"type": "Source","sourceStrategy": {"from": {"kind": "ImageStream","namespace": "openshift","name": "java"}}},"successfulBuildsHistoryLimit": "5"}}'
             )
           }
         }
