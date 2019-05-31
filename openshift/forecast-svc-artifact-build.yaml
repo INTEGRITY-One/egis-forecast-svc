@@ -1,0 +1,30 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: forecast-svc-artifact-build
+  namespace: egis
+  annotations:
+    description: Defines how to build the application artifact
+  labels:
+    app: forecast-svc
+spec:
+  runPolicy: Serial
+  source:
+    git:
+      uri: https://github.com/INTEGRITY-One/egis-forecast-svc.git
+    type: Git
+  strategy:
+    type: Source
+    sourceStrategy:
+      from:
+        kind: ImageStream
+        name: openjdk-11-rhel8
+        namespace: openshift
+  output:
+    to:
+      kind: ImageStreamTag
+      name: forecast-svc-artifact:latest
+  postCommit:
+    script: ''
+  successfulBuildsHistoryLimit: '3'
+  failedBuildsHistoryLimit: '3'
